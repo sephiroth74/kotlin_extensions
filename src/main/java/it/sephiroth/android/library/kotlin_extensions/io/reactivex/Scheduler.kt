@@ -1,9 +1,6 @@
 package it.sephiroth.android.library.kotlin_extensions.io.reactivex
 
-import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.Scheduler
-import io.reactivex.Single
+import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -16,6 +13,19 @@ fun <T> rxSingle(thread: Scheduler, func: () -> T): Single<T> {
             emitter.onSuccess(func.invoke())
         } catch (error: Throwable) {
             emitter.onError(error)
+        }
+    }.subscribeOn(thread)
+}
+
+fun <T> rxMaybe(thread: Scheduler, func: () -> T?): Maybe<T> {
+    return Maybe.create<T> { emitter ->
+        try {
+            val result = func.invoke()
+            if (!emitter.isDisposed) {
+                result?.let { emitter.onSuccess(result) } ?: run { emitter.onComplete() }
+            }
+        } catch (error: Throwable) {
+            if (!emitter.isDisposed) emitter.onError(error)
         }
     }.subscribeOn(thread)
 }
@@ -52,7 +62,7 @@ fun doOnScheduler(scheduler: Scheduler, func: () -> Unit): Disposable {
 }
 
 fun doOnMainThread(func: () -> Unit): Disposable? {
-    if(isMainThread()) {
+    if (isMainThread()) {
         func.invoke()
         return null
     }
