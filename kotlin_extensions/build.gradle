@@ -89,7 +89,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'it.sephiroth.android.library'
                 artifactId = 'kotlin_extensions'
-                version = '1.5'
+                version = '1.5.1'
             }
         }
     }
