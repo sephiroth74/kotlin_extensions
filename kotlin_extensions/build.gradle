@@ -4,6 +4,9 @@ plugins {
     id 'maven-publish'
 }
 
+group = 'it.sephiroth.android.library'
+version = '1.5.2'
+
 android {
     compileSdk 31
 
@@ -24,12 +27,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -46,50 +49,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-
-//
-//apply plugin: 'com.bmuschko.nexus'
-//
-//modifyPom {
-//    project {
-//        name 'Kotlin Extensions'
-//        description 'kotlin extensions for Android'
-//        url 'https://github.com/sephiroth74/kotlin_extensions'
-//
-//        scm {
-//            url 'https://github.com/sephiroth74/kotlin_extensions'
-//            connection 'scm:https://git@github.com:sephiroth74/kotlin_extensions.git'
-//            developerConnection 'scm:git://git@github.com:sephiroth74/kotlin_extensions.git'
-//        }
-//
-//        licenses {
-//            license {
-//                name 'MIT License'
-//                url 'https://raw.githubusercontent.com/sephiroth74/kotlin_extensions/master/LICENSE'
-//                distribution 'repo'
-//            }
-//        }
-//
-//        developers {
-//            developer {
-//                id 'sephiroth74'
-//                name 'alessandro crugnola'
-//                email 'alessandro.crugnola@gmail.com'
-//                roles 'architect', 'developer'
-//            }
-//        }
-//    }
-//}
-
-
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 from components.release
-                groupId = 'it.sephiroth.android.library'
+                groupId = group
                 artifactId = 'kotlin_extensions'
-                version = '1.5.1'
+                version = version
             }
         }
     }
