@@ -1,4 +1,4 @@
-package it.sephiroth.android.library.kotlin_extensions.view
+package it.sephiroth.android.library.kotlin_extensions.view.viewpropertyanimator
 
 import android.animation.Animator
 import android.view.ViewPropertyAnimator

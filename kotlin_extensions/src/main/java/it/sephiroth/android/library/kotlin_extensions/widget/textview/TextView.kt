@@ -1,4 +1,4 @@
-package it.sephiroth.android.library.kotlin_extensions.widget
+package it.sephiroth.android.library.kotlin_extensions.widget.textview
 
 import android.text.Editable
 import android.text.TextWatcher

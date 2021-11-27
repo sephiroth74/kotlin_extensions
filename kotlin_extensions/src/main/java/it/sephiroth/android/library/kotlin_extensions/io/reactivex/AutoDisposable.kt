@@ -1,15 +1,12 @@
 package it.sephiroth.android.library.kotlin_extensions.io.reactivex
 
 import androidx.annotation.Keep
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.*
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 
-class AutoDisposable : LifecycleObserver {
+class AutoDisposable : DefaultLifecycleObserver {
     private lateinit var compositeDisposable: CompositeDisposable
 
     constructor(owner: LifecycleOwner) : this(owner.lifecycle)
@@ -31,13 +28,11 @@ class AutoDisposable : LifecycleObserver {
         }
     }
 
-    @Suppress("unused")
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     @Keep
-    fun onDestroy() {
+    override fun onDestroy(owner: LifecycleOwner) {
         if (!compositeDisposable.isDisposed) {
             Timber.v("disposing: $compositeDisposable")
-            compositeDisposable.dispose()
+            compositeDisposable.clear()
         }
     }
 }
