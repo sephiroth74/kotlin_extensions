@@ -1,4 +1,4 @@
-package it.sephiroth.android.library.kotlin_extensions.net
+package it.sephiroth.android.library.kotlin_extensions.net.uri
 
 import android.content.ContentResolver
 import android.content.Context
@@ -7,16 +7,16 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import android.webkit.MimeTypeMap
 import java.io.File
+import java.util.*
 
 
 fun Uri.resolveMimeType(context: Context): String? {
-    val mimeType: String?
-    mimeType = if (scheme == ContentResolver.SCHEME_CONTENT) {
+    val mimeType: String? = if (scheme == ContentResolver.SCHEME_CONTENT) {
         val cr = context.contentResolver
         cr.getType(this)
     } else {
         val fileExtension = MimeTypeMap.getFileExtensionFromUrl(toString())
-        MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.toLowerCase())
+        MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.lowercase(Locale.getDefault()))
     }
     return mimeType
 }
@@ -26,7 +26,7 @@ fun Uri.resolveMimeType(context: Context): String? {
  */
 fun Uri.resolveMimeTypeFromFilePart(): String? {
     val fileExtension = MimeTypeMap.getFileExtensionFromUrl(toString())
-    return MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.toLowerCase())
+    return MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.lowercase(Locale.getDefault()))
 }
 
 fun Uri.resolveDisplayName(context: Context): String? {

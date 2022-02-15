@@ -1,3 +1,5 @@
+package it.sephiroth.android.library.kotlin_extensions.kotlin.string
+
 import java.security.MessageDigest
 
 

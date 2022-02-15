@@ -1,4 +1,4 @@
-package it.sephiroth.android.library.kotlin_extensions.lang
+package it.sephiroth.android.library.kotlin_extensions.lang.thread
 
 import android.os.Looper
 

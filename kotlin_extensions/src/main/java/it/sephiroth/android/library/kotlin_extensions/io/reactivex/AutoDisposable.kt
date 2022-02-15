@@ -2,8 +2,8 @@ package it.sephiroth.android.library.kotlin_extensions.io.reactivex
 
 import androidx.annotation.Keep
 import androidx.lifecycle.*
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
 import timber.log.Timber
 
 class AutoDisposable : DefaultLifecycleObserver {
